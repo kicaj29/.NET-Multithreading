@@ -36,7 +36,7 @@ namespace ThreadStaticWithAsyncAwait
         private static async Task Sleepy()
         {
             Console.WriteLine("Was on thread [{0}]", Thread.CurrentThread.ManagedThreadId);
-            await Task.Delay(1000);
+            await Task.Delay(5000);
             Console.WriteLine("Now on thread [{0}]", Thread.CurrentThread.ManagedThreadId);
         }
     }
