@@ -5,3 +5,6 @@ https://stackoverflow.com/questions/13010563/using-threadstatic-variables-with-a
 ## Async Await ConfigureAwait
 https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in-your-library-code-d7837dce3d7f   
 Looks that ConfigureAwait is needed only if we use Task.Wait function, if we use await then it is not needed
+
+## Async Await in REST API Controllers
+https://www.c-sharpcorner.com/article/async-await-and-asynchronous-programming-in-mvc/

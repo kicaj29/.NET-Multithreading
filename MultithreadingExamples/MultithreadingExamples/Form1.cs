@@ -24,5 +24,10 @@ namespace MultithreadingExamples
         {
             x.Go();
         }
+
+        private void btnTaskDelay_Click(object sender, EventArgs e)
+        {
+            new TaskDelay().Run();
+        }
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.btnAwaitWithOwnTask = new System.Windows.Forms.Button();
+            this.btnTaskDelay = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAwaitWithOwnTask
@@ -41,11 +42,22 @@
             this.btnAwaitWithOwnTask.UseVisualStyleBackColor = true;
             this.btnAwaitWithOwnTask.Click += new System.EventHandler(this.btnAwaitWithOwnTask_Click);
             // 
+            // btnTaskDelay
+            // 
+            this.btnTaskDelay.Location = new System.Drawing.Point(31, 88);
+            this.btnTaskDelay.Name = "btnTaskDelay";
+            this.btnTaskDelay.Size = new System.Drawing.Size(148, 23);
+            this.btnTaskDelay.TabIndex = 1;
+            this.btnTaskDelay.Text = "Task.Delay";
+            this.btnTaskDelay.UseVisualStyleBackColor = true;
+            this.btnTaskDelay.Click += new System.EventHandler(this.btnTaskDelay_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 262);
+            this.Controls.Add(this.btnTaskDelay);
             this.Controls.Add(this.btnAwaitWithOwnTask);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -56,6 +68,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnAwaitWithOwnTask;
+        private System.Windows.Forms.Button btnTaskDelay;
     }
 }
 
