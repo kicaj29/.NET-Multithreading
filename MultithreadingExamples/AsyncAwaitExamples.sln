@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadStaticWithAsyncAwait", "ThreadStaticWithAsyncAwait\ThreadStaticWithAsyncAwait.csproj", "{486346DF-1650-4E84-AE0B-DEC88A10284A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultithreadingExamples", "MultithreadingExamples\MultithreadingExamples.csproj", "{3B8B4EFC-DE08-4486-810A-EC832E710AA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigureAwait", "MultithreadingExamples\ConfigureAwait.csproj", "{3B8B4EFC-DE08-4486-810A-EC832E710AA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

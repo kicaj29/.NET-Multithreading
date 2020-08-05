@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3B8B4EFC-DE08-4486-810A-EC832E710AA9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MultithreadingExamples</RootNamespace>
-    <AssemblyName>MultithreadingExamples</AssemblyName>
+    <RootNamespace>ConfigureAwait</RootNamespace>
+    <AssemblyName>ConfigureAwait</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncAwaitSample.cs" />
+    <Compile Include="ConfigureAwaitExample.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +67,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
