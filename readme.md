@@ -26,9 +26,14 @@ In an ideal world people would always use await but it is also possible to call 
 ```c#
 private void btn_TaskWithReturn_Deadlock_Click(object sender, EventArgs e)
 {
-    System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId); // thread 1 (main thread)
+    System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId); 
+    // thread 1 (main thread)
+
     var result = cae.DoCurlAsync().Result;
-    System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId); // never will be executed (deadlock)
+
+    System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId); 
+    // never will be executed (deadlock)
+    
     btn_TaskWithReturn_Deadlock.Text = "DONE";
 }
 ```

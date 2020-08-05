@@ -51,10 +51,28 @@ namespace ConfigureAwait
 
         private void btn_TaskWithReturn_Deadlock_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId); // thread 1 (main thread)
+            System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId); 
+            // thread 1 (main thread)
+
             var result = cae.DoCurlAsync().Result;
-            System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId); // never will be executed (deadlock)
+
+            System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId); 
+            // never will be executed (deadlock)
+
             btn_TaskWithReturn_Deadlock.Text = "DONE";
+        }
+
+        private void btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread_noUIexception_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId);
+            // thread 1 (main thread)
+
+            var result = cae.DoCurlAsyncDoNotForceToContinueOnCallingThread().Result;
+
+            System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId);
+            // thread 1 (main thread)
+
+            btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread_noUIexception.Text = "DONE";
         }
 
         private async void btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread_UIexception_Click(object sender, EventArgs e)
@@ -69,18 +87,6 @@ namespace ConfigureAwait
 
             btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread_UIexception.Text = "DONE";
 
-        }
-        private void btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread_noUIexception_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId);
-            // thread 1 (main thread)
-
-            var result = cae.DoCurlAsyncDoNotForceToContinueOnCallingThread().Result;
-
-            System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId);
-            // thread 1 (main thread)
-
-            btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread_noUIexception.Text = "DONE";
         }
 
 
