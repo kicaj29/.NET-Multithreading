@@ -1,8 +1,8 @@
-## ThreadStaticWithAsyncAwait
+# ThreadStaticWithAsyncAwait
 This example demonstrates that we should not use ThreadStatic together with async/await because the callback delegate is executed on a different thread to one the async operation started on.
 https://stackoverflow.com/questions/13010563/using-threadstatic-variables-with-async-await   
 
-## Async Await ConfigureAwait
+# Async Await ConfigureAwait
 https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in-your-library-code-d7837dce3d7f   
 
 [Sources](./MultithreadingExamples/MultithreadingExamples/ConfigureAwaitExample.cs)
@@ -78,5 +78,22 @@ private async void btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread
 
 >NOTE: **In conclusion, it is good practice to always use ConfigureAwait(false) in your library code to prevent unwanted issues.**
 
-## Async Await in REST API Controllers
+# Task.Start caveats
+
+Information based on [article](https://devblogs.microsoft.com/pfxteam/task-factory-startnew-vs-new-task-start/).
+
+With TPL we can start a task in couple of different ways:
+* [Task.Start](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.start?view=netcore-3.1)
+* [Task.Run](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.run?view=netcore-3.1) (static)
+* [TaskFactory.StartNew](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskfactory.startnew?view=netcore-3.1)
+  
+In general it is recommended to use **Task.Run** or **TaskFactory.StartNew** because **Task.Start** is less efficient.   
+
+"
+For example, we take a lot of care within TPL to make sure that when accessing tasks from multiple threads concurrently, the “right” thing happens.  A Task is only ever executed once, and that means we need to ensure that multiple calls to a task’s **Start** method from multiple threads concurrently will only result in the task being scheduled once.  This requires synchronization, and synchronization has a cost.
+"
+
+Also in [Task.Start documentation](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.start?view=netcore-3.1) is comment: **"we recommend that you call an overload of the Task.Run or TaskFactory.StartNew method"**.
+
+# Async Await in REST API Controllers
 https://www.c-sharpcorner.com/article/async-await-and-asynchronous-programming-in-mvc/
