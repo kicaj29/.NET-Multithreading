@@ -5,7 +5,7 @@ https://stackoverflow.com/questions/13010563/using-threadstatic-variables-with-a
 ## Async Await ConfigureAwait
 https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in-your-library-code-d7837dce3d7f   
 
-[Sources](./MultithreadingExamples/MultithreadingExamples/AsyncAwaitSample.cs)
+[Sources](./MultithreadingExamples/MultithreadingExamples/ConfigureAwaitExample.cs)
 
 [Docs](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.configureawait?view=netcore-3.1) for ConfigureAwait. It is not clear why it is said **attempt**: "true to attempt to marshal the continuation back to the original context captured". It might suggest that there might be some situation when execution after awaiter will not be executed on the calling thread.   
 
@@ -41,7 +41,7 @@ private void btn_TaskWithReturn_NoDeadlockNoForceToContinueOnCallingThread_noUIe
     System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId);
     // thread 1 (main thread)
 
-    var result = cae.DoCurlAsyncDoNotForceToContinueOnCallingThread();
+    var result = cae.DoCurlAsyncDoNotForceToContinueOnCallingThread().Result;
 
     System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId);
     // thread 1 (main thread)

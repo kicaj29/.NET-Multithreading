@@ -75,7 +75,7 @@ namespace ConfigureAwait
             System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId);
             // thread 1 (main thread)
 
-            var result = cae.DoCurlAsyncDoNotForceToContinueOnCallingThread();
+            var result = cae.DoCurlAsyncDoNotForceToContinueOnCallingThread().Result;
 
             System.Diagnostics.Debug.WriteLine("Button Click - END [{0}]", Thread.CurrentThread.ManagedThreadId);
             // thread 1 (main thread)
