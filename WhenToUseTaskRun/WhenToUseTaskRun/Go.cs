@@ -7,18 +7,18 @@ namespace WhenToUseTaskRun
 {
     public class Go
     {
-        public async static void RunWithoutAwait()
+        public async static void RunAsync()
         {
-            Console.WriteLine($"RunWithoutAwait START: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"RunAsync START: {Thread.CurrentThread.ManagedThreadId}");
             var iSvc = new ImageService();
 
             await iSvc.DownloadImageAsync("fake");
 
-            Console.WriteLine($"RunWithoutAwait BETWEEN: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"RunAsync BETWEEN: {Thread.CurrentThread.ManagedThreadId}");
 
-            iSvc.BlurImageAsync("original.png");
+            await iSvc.BlurImageAsync("original.png");
 
-            Console.WriteLine($"RunWithoutAwait END: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"RunAsync END: {Thread.CurrentThread.ManagedThreadId}");
         }
 
 

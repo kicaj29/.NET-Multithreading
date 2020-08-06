@@ -6,9 +6,11 @@ namespace WhenToUseTaskRun
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("START");
 
-            Go.RunWithoutAwait();
+            Go.RunAsync();
+
+            Console.WriteLine("END");
 
             Console.ReadKey();
         }

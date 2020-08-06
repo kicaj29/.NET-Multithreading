@@ -11,7 +11,7 @@ namespace WhenToUseTaskRun
         // it simluates real method
         // https://github.com/dotnet/runtime/blob/master/src/libraries/System.Net.Http/src/System/Net/Http/HttpClient.cs#L207
         // https://github.com/dotnet/runtime/blob/master/src/libraries/System.Net.Http/src/System/Net/Http/HttpContent.cs#L298
-        // Because real HttpClient uses async/await it is also simulated here
+        // Because real HttpClient uses async/await it is also simulated here.
         public async Task<byte[]> GetByteArrayAsync(string url)
         {
             Console.WriteLine($"GetByteArrayAsync START: {Thread.CurrentThread.ManagedThreadId}");

@@ -1,3 +1,16 @@
+- [Async suffix vs async keyword](#async-suffix-vs-async-keyword)
+- [await scope and blocking execution](#await-scope-and-blocking-execution)
+  - [await](#await)
+  - [no await](#no-await)
+  - [no await but call Result](#no-await-but-call-result)
+- [ThreadStaticWithAsyncAwait](#threadstaticwithasyncawait)
+- [Async Await ConfigureAwait](#async-await-configureawait)
+- [Task.Start caveats](#taskstart-caveats)
+- [when to create and run new task (CPU vs. I/O bound code)](#when-to-create-and-run-new-task-cpu-vs-io-bound-code)
+  - [CPU-bound and I/O-bound code](#cpu-bound-and-io-bound-code)
+  - [example](#example)
+- [Async Await in REST API Controllers](#async-await-in-rest-api-controllers)
+
 # Async suffix vs async keyword
 
 [stackoverflow](https://stackoverflow.com/questions/15951774/does-the-use-of-the-async-suffix-in-a-method-name-depend-on-whether-the-async) discussion.
@@ -152,7 +165,7 @@ Task.Run END: 4
 Method2 END: 4
 ```
 
-# no await but call Result
+## no await but call Result
 
 Calling ```Task.Result``` blocks current thread until result is available.
 
@@ -331,6 +344,21 @@ saying that the computer's processor (or a particular thread running in the proc
 
 ## example
 
+[Example source code](./WhenToUseTaskRun/WhenToUseTaskRun)
+
+Result:
+```
+START
+RunAsync START: 1
+GetByteArrayAsync START: 1
+END
+GetByteArrayAsync in Task.Run: 4
+GetByteArrayAsync END: 4
+RunAsync BETWEEN: 4
+BlurImageAsync START: 5
+BlurImageAsync END: 5
+RunAsync END: 5
+```
 
 
 # Async Await in REST API Controllers
