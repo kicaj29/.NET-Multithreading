@@ -13,8 +13,9 @@ namespace ConfigureAwait
         {
             System.Diagnostics.Debug.WriteLine("Go Thread - START [{0}]", Thread.CurrentThread.ManagedThreadId);
 
-            this.Start().Wait();
-            //await this.Start();
+            // this.Start().Wait();
+            // await this.Start();
+            this.Start();
 
             System.Diagnostics.Debug.WriteLine("Go Thread - END [{0}]", Thread.CurrentThread.ManagedThreadId);
 
@@ -35,7 +36,7 @@ namespace ConfigureAwait
 
         private Task Wait()
         {
-            Task t = new Task(() => 
+            Task t = new Task(() =>
             {
                 System.Diagnostics.Debug.WriteLine("Task Begin - Thread [{0}]", Thread.CurrentThread.ManagedThreadId);
                 Thread.Sleep(5000);

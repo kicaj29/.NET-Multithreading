@@ -24,12 +24,12 @@ namespace ConfigureAwait
         private async void btnAwaitWithOwnTask_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Button Click - START [{0}]", Thread.CurrentThread.ManagedThreadId);
-            //v.Go();
+            v.Go();
             // v.Start().Wait();
-            await v.WaitWithRun().ConfigureAwait(continueOnCapturedContext: false);
+            // await v.WaitWithRun().ConfigureAwait(continueOnCapturedContext: false);
             // await v.WaitWithRun();
             //v.WaitWithRun().Wait();
-            var result = await cae.DoCurlAsync();
+            // var result = await cae.DoCurlAsync();
             // var result = cae.DoCurlAsync().Result;
 
             //btnAwaitWithOwnTask.Text = "DONE";
