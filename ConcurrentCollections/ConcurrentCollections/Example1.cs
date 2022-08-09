@@ -29,13 +29,13 @@ namespace ConcurrentCollections
         {
             return await Task.Run<MyMessage>(async () =>
             {
-                await Task.Delay(10);
+                //await Task.Delay(10);
                 MyMessage result = null;
                 while(result == null)
                 {
                     if (!_dict[requestId].TryTake(out result))
                     {
-                        await Task.Delay(100);
+                        await Task.Delay(10);
                     }
                     Console.WriteLine($"Count after removal: {_dict[requestId].Count}");
                 }
