@@ -10,6 +10,7 @@
   - [CPU-bound and I/O-bound code](#cpu-bound-and-io-bound-code)
   - [example](#example)
 - [Async Await in REST API Controllers](#async-await-in-rest-api-controllers)
+- [Deadlock](#deadlock)
 
 # Async suffix vs async keyword
 
@@ -363,3 +364,9 @@ RunAsync END: 5
 
 # Async Await in REST API Controllers
 https://www.c-sharpcorner.com/article/async-await-and-asynchronous-programming-in-mvc/
+
+# Deadlock
+
+Really [great article](https://medium.com/rubrikkgroup/understanding-async-avoiding-deadlocks-e41f8f2c6f5d) explaining deadlocks in .NET.
+
+![deadlocks](./images/01.png)
