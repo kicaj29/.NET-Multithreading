@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandlingInTasks.AspNetCore", "ExceptionHandlingInTasks.AspNetCore\ExceptionHandlingInTasks.AspNetCore.csproj", "{07DC3E34-5C19-4898-B7E3-1CF678EFCE00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandlingInTasks.ConsoleApp", "ExceptionHandlingInTasks.ConsoleApp\ExceptionHandlingInTasks.ConsoleApp.csproj", "{3B295982-B504-4A8E-8C00-AB9B783D18D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07DC3E34-5C19-4898-B7E3-1CF678EFCE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07DC3E34-5C19-4898-B7E3-1CF678EFCE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07DC3E34-5C19-4898-B7E3-1CF678EFCE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07DC3E34-5C19-4898-B7E3-1CF678EFCE00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B295982-B504-4A8E-8C00-AB9B783D18D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B295982-B504-4A8E-8C00-AB9B783D18D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B295982-B504-4A8E-8C00-AB9B783D18D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B295982-B504-4A8E-8C00-AB9B783D18D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34016656-0CD0-4E5D-83E3-C9B42FF171EA}
+	EndGlobalSection
+EndGlobal
