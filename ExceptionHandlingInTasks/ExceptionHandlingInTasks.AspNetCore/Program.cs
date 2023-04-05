@@ -31,7 +31,7 @@ async Task OnTimer()
 {
     await Task.Run(() =>
     {
-        throw new Exception($"Timer: exception from task. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+        // throw new Exception($"Timer: exception from task. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
     });
     // throw new Exception($"Timer: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
 }

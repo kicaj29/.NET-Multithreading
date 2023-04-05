@@ -56,5 +56,39 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetStringNoAwaitThrowsAsync")]
+        public async Task<ActionResult> GetStringNoAwaitThrowsAsync()
+        {
+            try
+            {
+
+                // V1 - the exception will be swallowed and the client will get 200
+                /*Task.Run<string>(() =>
+                {
+                    // Thread.Sleep(1000);
+                    throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                    return "abc";
+                });*/
+
+                // V2 - the exception will be swallowed and the client will get 200
+                await Task.Run(async () =>
+                {
+                    Task.Run<string>(() =>
+                    {
+                        throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                        return "abc";
+                    });
+                });
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw;
+            }
+            return Ok();
+        }
     }
 }
