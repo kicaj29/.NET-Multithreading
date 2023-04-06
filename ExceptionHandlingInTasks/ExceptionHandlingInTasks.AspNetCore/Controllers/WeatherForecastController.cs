@@ -13,10 +13,12 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly HttpClient _httpClient;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, HttpClient httpClient)
         {
             _logger = logger;
+            _httpClient = httpClient;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -57,30 +59,96 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
             return result;
         }
 
-        [HttpGet("GetStringNoAwaitThrowsAsync")]
-        public async Task<ActionResult> GetStringNoAwaitThrowsAsync()
+        [HttpGet("FireAndForgetExceptionHandling")]
+        public async Task<ActionResult> FireAndForgetExceptionHandling(HowToThrowWithoutAwait howToThrow)
         {
             try
             {
-
-                // V1 - the exception will be swallowed and the client will get 200
-                /*Task.Run<string>(() =>
+                switch (howToThrow)
                 {
-                    // Thread.Sleep(1000);
-                    throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
-                    return "abc";
-                });*/
+                    case HowToThrowWithoutAwait.RunNestedNoAsyncWithReturn:                 // returns 500 to the client
+                        await Task.Run(() =>
+                        {
+                            // await Task.Yield(); // this will schedule thread pool with the rest of this method, TODO this as better example
+                            return Task.Run(() =>                                           // current test is returned to parent task can await it
+                            {
+                                throw new Exception($"FireAndForgetExceptionHandling: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        });
+                        break;
+                    case HowToThrowWithoutAwait.RunNestedNoAsyncNoReturn:                   // returns 200 to the client
+                        await Task.Run(() =>
+                        {
+                            Task.Run(() =>                                                  // there is no return so parent task cannot await child task
+                            {
+                                throw new Exception($"FireAndForgetExceptionHandling: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        });
+                        break;
+                    case HowToThrowWithoutAwait.RunNestedAsyncWithReturn:                   // returns 200 to the client
+                        await Task.Run(async () =>
+                        {
+                            return Task.Run(() =>
+                            {
+                                throw new Exception($"FireAndForgetExceptionHandling: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        });
+                        break;
+                    case HowToThrowWithoutAwait.RunNestedAsyncNoReturn:                     // returns 200 to the client
+                        await Task.Run(async () =>
+                        {
+                            Task.Run(() =>
+                            {
+                                throw new Exception($"FireAndForgetExceptionHandling: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        });
+                        break;
+                    case HowToThrowWithoutAwait.RunSingle:                                  // returns 200 to the client
+                        Task.Run(() =>
+                        {
+                            throw new Exception($"FireAndForgetExceptionHandling: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                        });
+                        break;
+                    case HowToThrowWithoutAwait.StartNestedNoAsyncWithReturnNoUnwrap:       // returns 200 to the client
+                        await Task.Factory.StartNew(() =>
+                        {
+                            return Task.Run(() =>
+                            {
+                                throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        });
+                        break;
+                    case HowToThrowWithoutAwait.StartNestedNoAsyncWithReturnUnwrap:         // returns 500 to the client (Unwarap is not needed in case for Task.Run)
+                        await Task.Factory.StartNew(() =>
+                        {
+                            return Task.Run(() =>
+                            {
+                                throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        }).Unwrap();
+                        break;
+                    case HowToThrowWithoutAwait.StartNestedAsyncWithReturnUnwrap:           // returns 200 to the client
+                        await Task.Factory.StartNew(async () =>
+                        {
+                            return Task.Run(() =>
+                            {
+                                throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        }).Unwrap();
+                        break;
+                    case HowToThrowWithoutAwait.StartNestedAsyncNoReturnUnwrap:             // returns 200 to the client
+                        await Task.Factory.StartNew(async () =>
+                        {
+                            Task.Run(() =>
+                            {
+                                throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
+                            });
+                        }).Unwrap();
+                        break;
+                    default:
+                        throw new NotSupportedException();
 
-                // V2 - the exception will be swallowed and the client will get 200
-                await Task.Run(async () =>
-                {
-                    Task.Run<string>(() =>
-                    {
-                        throw new Exception($"GetStringThrowsAsync: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
-                        return "abc";
-                    });
-                });
-
+                }
 
             }
             catch (Exception ex)
