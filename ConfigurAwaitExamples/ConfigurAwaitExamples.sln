@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigureAwait", "MultithreadingExamples\ConfigureAwait.csproj", "{3B8B4EFC-DE08-4486-810A-EC832E710AA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigureAwaitInAspNet", "ConfigureAwaitInAspNet\ConfigureAwaitInAspNet.csproj", "{879D66D3-47F1-4F1F-B01D-BA6754B19A3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3B8B4EFC-DE08-4486-810A-EC832E710AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B8B4EFC-DE08-4486-810A-EC832E710AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B8B4EFC-DE08-4486-810A-EC832E710AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{879D66D3-47F1-4F1F-B01D-BA6754B19A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{879D66D3-47F1-4F1F-B01D-BA6754B19A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{879D66D3-47F1-4F1F-B01D-BA6754B19A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{879D66D3-47F1-4F1F-B01D-BA6754B19A3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
