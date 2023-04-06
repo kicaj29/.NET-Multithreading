@@ -18,19 +18,18 @@ namespace ThreadStaticWithAsyncAwait
             Start().Wait();
             Console.WriteLine("Main Thread [{0}]", Thread.CurrentThread.ManagedThreadId);
             Console.ReadKey();
-            
         }
 
         private static async Task Start()
         {
             Secret = "moo moo";
             Console.WriteLine("Started on thread [{0}]", Thread.CurrentThread.ManagedThreadId);
-            Console.WriteLine("Secret is [{0}]", Secret);
+            Console.WriteLine($"Secret before sleepy is: {Secret}");
 
             await Sleepy();
 
             Console.WriteLine("Finished on thread [{0}]", Thread.CurrentThread.ManagedThreadId);
-            Console.WriteLine("Secret is [{0}]", Secret);
+            Console.WriteLine($"Secret after sleepy is: {Secret}");
         }
 
         private static async Task Sleepy()

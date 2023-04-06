@@ -76,7 +76,7 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
                             });
                         });
                         break;
-                    case HowToThrowWithoutAwait.RunNestedNoAsyncNoReturn:                   // returns 200 to the client
+                    case HowToThrowWithoutAwait.RunNestedNoAsyncNoReturn:                   // returns 200 to the client (exception is swallowed)
                         await Task.Run(() =>
                         {
                             Task.Run(() =>                                                  // there is no return so parent task cannot await child task
@@ -85,7 +85,7 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
                             });
                         });
                         break;
-                    case HowToThrowWithoutAwait.RunNestedAsyncWithReturn:                   // returns 200 to the client
+                    case HowToThrowWithoutAwait.RunNestedAsyncWithReturn:                   // returns 200 to the client (exception is swallowed)
                         await Task.Run(async () =>
                         {
                             return Task.Run(() =>
@@ -94,7 +94,7 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
                             });
                         });
                         break;
-                    case HowToThrowWithoutAwait.RunNestedAsyncNoReturn:                     // returns 200 to the client
+                    case HowToThrowWithoutAwait.RunNestedAsyncNoReturn:                     // returns 200 to the client (exception is swallowed)
                         await Task.Run(async () =>
                         {
                             Task.Run(() =>
@@ -103,13 +103,13 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
                             });
                         });
                         break;
-                    case HowToThrowWithoutAwait.RunSingle:                                  // returns 200 to the client
+                    case HowToThrowWithoutAwait.RunSingle:                                  // returns 200 to the client (exception is swallowed)
                         Task.Run(() =>
                         {
                             throw new Exception($"FireAndForgetExceptionHandling: exception. IsThreadPoolThread: {Thread.CurrentThread.IsThreadPoolThread}");
                         });
                         break;
-                    case HowToThrowWithoutAwait.StartNestedNoAsyncWithReturnNoUnwrap:       // returns 200 to the client
+                    case HowToThrowWithoutAwait.StartNestedNoAsyncWithReturnNoUnwrap:       // returns 200 to the client (exception is swallowed)
                         await Task.Factory.StartNew(() =>
                         {
                             return Task.Run(() =>
@@ -127,7 +127,7 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
                             });
                         }).Unwrap();
                         break;
-                    case HowToThrowWithoutAwait.StartNestedAsyncWithReturnUnwrap:           // returns 200 to the client
+                    case HowToThrowWithoutAwait.StartNestedAsyncWithReturnUnwrap:           // returns 200 to the client (exception is swallowed)
                         await Task.Factory.StartNew(async () =>
                         {
                             return Task.Run(() =>
@@ -136,7 +136,7 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
                             });
                         }).Unwrap();
                         break;
-                    case HowToThrowWithoutAwait.StartNestedAsyncNoReturnUnwrap:             // returns 200 to the client
+                    case HowToThrowWithoutAwait.StartNestedAsyncNoReturnUnwrap:             // returns 200 to the client (exception is swallowed)
                         await Task.Factory.StartNew(async () =>
                         {
                             Task.Run(() =>
