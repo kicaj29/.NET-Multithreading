@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace ExceptionHandlingInTasks.AspNetCore.Controllers
@@ -163,8 +164,8 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
         [HttpGet("TestNeedForCustomExceptionSerializationTasks")]
         public async Task<ActionResult> TestNeedForCustomExceptionSerializationTasks()
         {
-            //try
-            //{
+            try
+            {
                 Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
                 await Task.Run(() =>
                 {
@@ -173,12 +174,13 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
                     Debug.WriteLine(customEx.GetHashCode());
                     throw customEx;
                 });
-            //}
-            /*catch (MyCustomException ex)
+            }
+            catch (MyCustomException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
                 Debug.WriteLine(ex.GetHashCode());
-            }*/
+            }
             Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
             return Ok();
         }
