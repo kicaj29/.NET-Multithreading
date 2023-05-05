@@ -21,3 +21,5 @@ var obj = new MethodToTest();
 await obj.GetStringThrowsAsync();
 
 Console.ReadKey();
+
+

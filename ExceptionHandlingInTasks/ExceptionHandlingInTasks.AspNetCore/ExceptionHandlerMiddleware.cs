@@ -18,6 +18,7 @@ namespace ExceptionHandlingInTasks.AspNetCore
             }
             catch (Exception exc)
             {
+                Debug.WriteLine(exc.GetHashCode());
                 Debug.WriteLine("CAUGHT BY ExceptionHandlerMiddleware :" + exc.Message);
                 throw;
             }

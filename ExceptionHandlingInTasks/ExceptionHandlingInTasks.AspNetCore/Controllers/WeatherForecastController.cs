@@ -158,5 +158,29 @@ namespace ExceptionHandlingInTasks.AspNetCore.Controllers
             }
             return Ok();
         }
+
+
+        [HttpGet("TestNeedForCustomExceptionSerializationTasks")]
+        public async Task<ActionResult> TestNeedForCustomExceptionSerializationTasks()
+        {
+            //try
+            //{
+                Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                await Task.Run(() =>
+                {
+                    Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                    MyCustomException customEx = new MyCustomException("ABC");
+                    Debug.WriteLine(customEx.GetHashCode());
+                    throw customEx;
+                });
+            //}
+            /*catch (MyCustomException ex)
+            {
+                Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                Debug.WriteLine(ex.GetHashCode());
+            }*/
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            return Ok();
+        }
     }
 }
