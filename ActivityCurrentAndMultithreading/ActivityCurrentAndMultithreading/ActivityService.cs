@@ -28,8 +28,8 @@ namespace ActivityCurrentAndMultithreading
         {
             await Task.Run(() =>
             {
-                _ = ExecuteHandler1();
-                _ = ExecuteHandler2();
+                _ = ExecuteHandler1(); // trace id which ends with 100
+                _ = ExecuteHandler2(); // trace id which ends with 200
             });
         }
 
@@ -39,6 +39,8 @@ namespace ActivityCurrentAndMultithreading
             {
                 Console.WriteLine($"ExecuteHandler1: {Activity.Current?.RootId}");
                 await Handler1();
+                // Add delay to check Activity.Current?.RootId when ExecuteHandler2 will be done.
+                await Task.Delay(4000);
                 Console.WriteLine("await Handler1 complete");
                 Console.WriteLine($"ExecuteHandler1: {Activity.Current?.RootId}");
             }
@@ -47,7 +49,6 @@ namespace ActivityCurrentAndMultithreading
         async Task Handler1()
         {
             Console.WriteLine($"Handler1: {Activity.Current?.RootId}");
-            await Task.Delay(5000);
         }
 
         async Task ExecuteHandler2()
@@ -55,7 +56,7 @@ namespace ActivityCurrentAndMultithreading
             using (StartActivityAsTraceIdCarrier("916b478b997503ddbe9fd8bf2dfdd200"))
             {
                 Console.WriteLine($"ExecuteHandler2: {Activity.Current?.RootId}");
-                await Handler1();
+                await Handler2();
                 Console.WriteLine($"ExecuteHandler2: {Activity.Current?.RootId}");
             }
         }
