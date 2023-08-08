@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ActivityCurrentAndMultithreading
@@ -37,8 +38,8 @@ namespace ActivityCurrentAndMultithreading
 
         async Task ExecuteHandler1()
         {
-            using (StartActivityAsTraceIdCarrier("ed492ba209b2b11e2ba6a9e501aba100"))
-            {
+            StartActivityAsTraceIdCarrier("ed492ba209b2b11e2ba6a9e501aba100");
+            //{
                 Console.WriteLine($"ExecuteHandler1: {Activity.Current?.RootId}");
                 await Handler1();
                 // Add delay to check Activity.Current?.RootId when ExecuteHandler2 will be done.
@@ -52,7 +53,7 @@ namespace ActivityCurrentAndMultithreading
                 });
                 Console.WriteLine("await Handler1 complete");
                 Console.WriteLine($"ExecuteHandler1: {Activity.Current?.RootId}");
-            }
+            //}
         }
 
         async Task Handler1()
@@ -63,12 +64,12 @@ namespace ActivityCurrentAndMultithreading
         async Task ExecuteHandler2()
         {
             Console.WriteLine($"ExecuteHandler2 (before starting activity): {Activity.Current?.RootId}");
-            using (StartActivityAsTraceIdCarrier("916b478b997503ddbe9fd8bf2dfdd200"))
-            {
+            StartActivityAsTraceIdCarrier("916b478b997503ddbe9fd8bf2dfdd200");
+            //{
                 Console.WriteLine($"ExecuteHandler2 (activity started): {Activity.Current?.RootId}");
                 await Handler2();
                 Console.WriteLine($"ExecuteHandler2 (activity started): {Activity.Current?.RootId}");
-            }
+            //}
         }
 
         async Task Handler2()
