@@ -24,7 +24,10 @@ namespace AsyncEventHandlerExample
             }
         }
 
-        public async Task OnReceivedAsyncVer1(AsyncEventArgs e)
+        /// <summary>
+        /// Starts all async handlers in parallel and waits for all of them to complete.
+        /// </summary>
+        public async Task OnReceivedAsyncTaskWhenAll(AsyncEventArgs e)
         {
             var handlers = _receivedAsync;
             if (handlers is not null)
@@ -39,7 +42,10 @@ namespace AsyncEventHandlerExample
             }
         }
 
-        public async Task OnReceivedAsyncVer2(AsyncEventArgs e)
+        /// <summary>
+        /// Starts all async handlers one by one and waits for each of them to complete before starting the next one.
+        /// </summary>
+        public async Task OnReceivedAsyncAwaitEveryHandler(AsyncEventArgs e)
         {
             var handlers = _receivedAsync;
             if (handlers is not null)

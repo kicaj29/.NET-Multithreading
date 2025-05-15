@@ -6,18 +6,18 @@
         {
             Console.WriteLine("Started");
 
-            AsyncEventHandlerOwner asyncEventHandlerOwner = new();
-
-            for(int i = 0; i < 10; i++)
-            {
-                //asyncEventHandlerOwner.ReceivedAsync += async (model, ea) => await ProcessMessageWithAsyncAwait(ea);
-
-                asyncEventHandlerOwner.ReceivedAsync += async (model, ea) => await ProcessMessageWithReturnTask(ea);
-            }
-
-            await asyncEventHandlerOwner.OnReceivedAsyncVer2(new AsyncEventArgs());
-
+            await ExecuteHandlersSequentially();
             Console.WriteLine("Finished");
+        }
+
+        private static async Task ExecuteHandlersSequentially()
+        {
+            AsyncEventHandlerOwner asyncEventHandlerOwner = new();
+            for (int i = 0; i < 10; i++)
+            {
+                asyncEventHandlerOwner.ReceivedAsync += async (_, ea) => await ProcessMessageWithAsyncAwait(ea);
+            }
+            await asyncEventHandlerOwner.OnReceivedAsyncAwaitEveryHandler(new AsyncEventArgs());
         }
 
         static private async Task ProcessMessageWithAsyncAwait(AsyncEventArgs args)
