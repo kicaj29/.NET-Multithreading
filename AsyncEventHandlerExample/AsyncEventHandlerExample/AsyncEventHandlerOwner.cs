@@ -24,7 +24,7 @@ namespace AsyncEventHandlerExample
             }
         }
 
-        public async Task OnReceivedAsync(AsyncEventArgs e)
+        public async Task OnReceivedAsyncVer1(AsyncEventArgs e)
         {
             var handlers = _receivedAsync;
             if (handlers is not null)
@@ -36,6 +36,19 @@ namespace AsyncEventHandlerExample
                     tasks[i] = ((AsyncEventHandler<AsyncEventArgs>)invocationList[i])(this, e);
                 }
                 await Task.WhenAll(tasks);
+            }
+        }
+
+        public async Task OnReceivedAsyncVer2(AsyncEventArgs e)
+        {
+            var handlers = _receivedAsync;
+            if (handlers is not null)
+            {
+                var invocationList = handlers.GetInvocationList();
+                for (int i = 0; i < invocationList.Length; i++)
+                {
+                    await ((AsyncEventHandler<AsyncEventArgs>)invocationList[i])(this, e);
+                }
             }
         }
     }

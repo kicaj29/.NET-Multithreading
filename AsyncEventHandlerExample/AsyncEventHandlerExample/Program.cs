@@ -13,7 +13,7 @@
                 asyncEventHandlerOwner.ReceivedAsync += async (model, ea) => await ProcessMessageWithAsyncAwait(ea);
             }
 
-            await asyncEventHandlerOwner.OnReceivedAsync(new AsyncEventArgs());
+            await asyncEventHandlerOwner.OnReceivedAsyncVer2(new AsyncEventArgs());
 
             Console.WriteLine("Finished");
         }
