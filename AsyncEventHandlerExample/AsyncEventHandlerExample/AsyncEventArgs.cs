@@ -8,5 +8,6 @@ namespace AsyncEventHandlerExample
 {
     public class AsyncEventArgs
     {
+        public int Index { get; set; }
     }
 }
