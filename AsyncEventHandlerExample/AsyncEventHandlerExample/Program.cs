@@ -10,7 +10,9 @@
 
             for(int i = 0; i < 10; i++)
             {
-                asyncEventHandlerOwner.ReceivedAsync += async (model, ea) => await ProcessMessageWithAsyncAwait(ea);
+                //asyncEventHandlerOwner.ReceivedAsync += async (model, ea) => await ProcessMessageWithAsyncAwait(ea);
+
+                asyncEventHandlerOwner.ReceivedAsync += async (model, ea) => await ProcessMessageWithReturnTask(ea);
             }
 
             await asyncEventHandlerOwner.OnReceivedAsyncVer2(new AsyncEventArgs());
@@ -21,7 +23,6 @@
         static private async Task ProcessMessageWithAsyncAwait(AsyncEventArgs args)
         {
             Console.WriteLine("ProcessMessageWithAsyncAwait started");
-            await Task.Delay(1);
             Task processingTask = Task.Run(async () =>
             {
                 await InternalProcessing();
@@ -33,6 +34,23 @@
             });
 
             Console.WriteLine("ProcessMessageWithAsyncAwait finished");
+        }
+
+        static private Task ProcessMessageWithReturnTask(AsyncEventArgs args)
+        {
+            Console.WriteLine("ProcessMessageWithAsyncAwait started");
+            Task processingTask = Task.Run(async () =>
+            {
+                await InternalProcessing();
+            });
+
+            processingTask.ContinueWith(t =>
+            {
+                Console.WriteLine("ProcessMessageWithAsyncAwait ContinueWith");
+            });
+
+            Console.WriteLine("ProcessMessageWithAsyncAwait finished");
+            return Task.CompletedTask;
         }
 
         static private async Task InternalProcessing()
