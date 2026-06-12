@@ -25,16 +25,18 @@ namespace TaskWhenAll
 
         private async Task<DateTime> DoWork(int taskId)
         {
-            // This sleep will slow down the loop in StartNewJob,
-            // allowing us to see the effect of starting tasks sequentially.
-            // So even we do not use await in the loop, the tasks will not start until the sleep is completed!!!
-            Thread.Sleep(5000);
+            return await Task.Run<DateTime>(async () =>
+            {
+                // This sleep will not slow down the loop in StartNewJob,
+                // because it's running in a separate task. Each task will sleep for 5 seconds independently.
+                Thread.Sleep(5000);
 
-            Console.WriteLine($"Task {taskId} is starting.");
-            // Simulate some work
-            await Task.Delay(5000);
-            Console.WriteLine($"Task {taskId} is completed.");
-            return DateTime.Now;
+                Console.WriteLine($"Task {taskId} is starting.");
+                // Simulate some work
+                await Task.Delay(5000);
+                Console.WriteLine($"Task {taskId} is completed.");
+                return DateTime.Now;
+            });
         }
     }
 }
